@@ -4,7 +4,8 @@ from pyglet.window import key
 
 import components
 
-class Renderer(ecs.System):
+
+class RenderSystem(ecs.System):
     """Renderer"""
     def __init__(self):
         super(Render, self).__init__()
@@ -14,13 +15,20 @@ class Renderer(ecs.System):
 
     def update(self, dt):
         for entity, renderable_component in \
-            self.entity_manager.pairs_for_type(Renderable):
+            self.entity_manager.pairs_for_type(Render):
                 renderable_component.sprite.draw()
 
-class Input(ecs.Component):
+
+class InputSystem(ecs.System):
     """Input handler"""
+
     def __init__(self, window: pyglet.window):
         super(Input, self).__init__()
+        # Default movements
+        self.player_right = False
+        self.player_left = False
+        self.player_up = False
+        self.player_down = False
         # Register the event lister from the window
         @pyglet.window.event
         def on_key_press(symbol, modifier):
