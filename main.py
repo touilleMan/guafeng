@@ -10,6 +10,8 @@ if __name__ == '__main__':
 
 	render_system = systems.RenderSystem()
 	system_manager.add_system(render_system)
+	input_system = systems.InputSystem()
+	system_manager.add_system(input_system)
 	archetypes.create_player(entity_manager)
 
 	# Start the pyglet application

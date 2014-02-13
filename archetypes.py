@@ -12,4 +12,5 @@ def create_player(entity_manager):
 	entity_manager.add_component(player, player_render)
 	player_coordinates = components.Coordinates()
 	entity_manager.add_component(player, player_coordinates)
+	entity_manager.add_component(player, components.Will())
 	return player
