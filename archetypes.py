@@ -10,4 +10,6 @@ def create_player(entity_manager):
 	player = entity_manager.create_entity()
 	player_render = components.Render(pyglet.Sprite(PLAYER_IMAGE))
 	entity_manager.add_component(player, player_render)
+	player_coordinates = components.Coordinates()
+	entity_manager.add_component(player, player_coordinates)
 	return player

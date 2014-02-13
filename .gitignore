@@ -34,3 +34,7 @@ nosetests.xml
 .mr.developer.cfg
 .project
 .pydevproject
+
+.token.txt
+.gitignore
+python3.2m.exe.stackdump

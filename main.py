@@ -8,7 +8,8 @@ if __name__ == '__main__':
 	entity_manager = ecs.EntityManager()
 	system_manager = ecs.SystemManager(entity_manager)
 
-	system_manager.add_system(systems.RenderSystem())
+	render_system = systems.RenderSystem()
+	system_manager.add_system(render_system)
 	archetypes.create_player(entity_manager)
 
 	# Start the pyglet application
@@ -16,5 +17,6 @@ if __name__ == '__main__':
 	@window.event
 	def on_draw():
     	window.clear()
-		system_manager.systems[systems.RenderSystem].update()
+		render_system.draw()
+	pyglet.clock.schedule_interval(system_manager.update, 1/60.)
 	pyglet.app.run()
