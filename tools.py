@@ -2,7 +2,9 @@ import unittest
 
 
 class Vect2D:
+
     """2 dimentional vector"""
+
     def __init__(self, x=0, y=0):
         super(Vect2D, self).__init__()
         self.x = x
@@ -19,6 +21,7 @@ class Vect2D:
 
 
 class TestVect2D:
+
     def test_1(self):
         v1 = Vect2D()
         v2 = Vect2D(1, 2)

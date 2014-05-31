@@ -1,12 +1,15 @@
 import ecs
 import pyglet
 from pyglet.window import key
+import pymunk
 
 import components
 
 
 class RenderSystem(ecs.System):
+
     """Renderer"""
+
     def __init__(self, window):
         super().__init__()
         self._window = window
@@ -14,9 +17,10 @@ class RenderSystem(ecs.System):
     def update(self, dt):
         for entity, render in \
                 self.entity_manager.pairs_for_type(components.Render):
-                coordinates = self.entity_manager.component_for_entity(entity, components.Coordinates)
-                render.sprite.x = coordinates.position.x
-                render.sprite.y = coordinates.position.y
+                physic = self.entity_manager.component_for_entity(
+                    entity, components.Physic)
+                render.sprite.x = physic.body.position.x
+                render.sprite.y = physic.body.position.y
 
     def draw(self):
         self._window.clear()
@@ -26,6 +30,7 @@ class RenderSystem(ecs.System):
 
 
 class InputSystem(ecs.System):
+
     """Input handler"""
 
     def __init__(self, window: pyglet.window):
@@ -50,14 +55,24 @@ class MoveSystem(ecs.System):
     def update(self, dt):
         for entity, behaviour in \
                 self.entity_manager.pairs_for_type(components.Behaviour):
-                coordinates = self.entity_manager.component_for_entity(entity, components.Coordinates)
-                if behaviour.left:
-                    coordinates.position.x -= behaviour.speed * dt
-                if behaviour.right:
-                    coordinates.position.x += behaviour.speed * dt
+                physic = self.entity_manager.component_for_entity(
+                    entity, components.Physic)
+                if behaviour.movement:
+                    physic.body.velocity.x = behaviour.movement * \
+                        behaviour.speed
+                else:
+                    physic.body.velocity.x = 0
+
                 behaviour.reset()
 
 
 class PhysicSystem(ecs.System):
+    GRAVITY = (0, -9.81)
+
     def __init__(self):
         super().__init__()
+        self.space = pymunk.Space()
+        self.space.gravity = self.GRAVITY
+
+    def update(self, dt):
+        self.space.step(dt)

@@ -19,8 +19,11 @@ def main():
     system_manager.add_system(render_system)
     system_manager.add_system(input_system)
     system_manager.add_system(systems.MoveSystem())
+    physic_system = systems.PhysicSystem()
+    system_manager.add_system(physic_system)
 
-    archetypes.create_player(entity_manager)
+    archetypes.create_map(entity_manager, physic_system)
+    archetypes.create_player(entity_manager, physic_system)
 
     # Start the pyglet application
     @window.event
@@ -28,7 +31,7 @@ def main():
         render_system.draw()
 #   def on_update(dt, xx):
 #       system_manager.update(dt)
-    pyglet.clock.schedule_interval(system_manager.update, 1/60.)
+    pyglet.clock.schedule_interval(system_manager.update, 1 / 60.)
     pyglet.app.run()
 
 if __name__ == '__main__':
