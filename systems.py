@@ -15,12 +15,19 @@ class RenderSystem(ecs.System):
         self._window = window
 
     def update(self, dt):
+        cams_active = [c for e, c in
+                       self.entity_manager.pairs_for_type(components.Camera)
+                       if c.active]
+        if not cams_active:
+            return
+        # Should be only one active camera
+        camera = cams_active[0]
         for entity, render in \
                 self.entity_manager.pairs_for_type(components.Render):
                 physic = self.entity_manager.component_for_entity(
                     entity, components.Physic)
-                render.sprite.x = physic.body.position.x
-                render.sprite.y = physic.body.position.y
+                render.sprite.x = physic.body.position.x - camera.x
+                render.sprite.y = physic.body.position.y - camera.y
 
     def draw(self):
         self._window.clear()
@@ -67,7 +74,7 @@ class MoveSystem(ecs.System):
 
 
 class PhysicSystem(ecs.System):
-    GRAVITY = (0, -9.81)
+    GRAVITY = (0, -900)
 
     def __init__(self):
         super().__init__()

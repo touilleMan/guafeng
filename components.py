@@ -24,30 +24,30 @@ class Coordinates(ecs.Component):
 class Physic(ecs.Component):
 
     def __init__(self, body):
+        super().__init__()
         self.body = body
-    # def __init__(self, **kwargs):
-    #     super().__init__()
-    #     x = kwargs['x'] if 'x' in kwargs else 0
-    #     y = kwargs['y'] if 'y' in kwargs else 0
-    #     self.position = Vect2D(x, y)
-    #     dx = kwargs['dx'] if 'dx' in kwargs else 0
-    #     dy = kwargs['dy'] if 'dy' in kwargs else 0
-    #     self.speed = Vect2D(dx, dy)
-    #     ax = kwargs['ax'] if 'ax' in kwargs else 0
-    #     ay = kwargs['ay'] if 'ay' in kwargs else 0
-    #     self.acceleration = Vect2D(ax, ay)
-    #     self.rot = kwargs['rot'] if 'rot' in kwargs else 0
-    #     self.drot = kwargs['drot'] if 'drot' in kwargs else 0
-    #     hitbox_x = kwargs['hitbox_x'] if 'hitbox_x' in kwargs else 0
-    #     hitbox_y = kwargs['hitbox_y'] if 'hitbox_y' in kwargs else 0
-    #     self.hitbox = Vect2D(hitbox_x, hitbox_y)
 
 
 class Input(ecs.Component):
 
     def __init__(self, keymap=None):
+        """:param: keymap : dict of keys with they callback"""
         super().__init__()
         self.keymap = keymap if keymap else []
+
+
+class Camera(ecs.Component):
+
+    def __init__(self, x=0, y=0, active=True):
+        """x,y : world coordinates of the camera"""
+        super().__init__()
+        self.active = active
+        self.x = x
+        self.y = y
+
+    def move(self, x=0, y=0):
+        self.x += x
+        self.y += y
 
 
 class Behaviour(ecs.Component):

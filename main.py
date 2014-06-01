@@ -24,13 +24,12 @@ def main():
 
     archetypes.create_map(entity_manager, physic_system)
     archetypes.create_player(entity_manager, physic_system)
+    archetypes.create_camera(entity_manager)
 
     # Start the pyglet application
     @window.event
     def on_draw():
         render_system.draw()
-#   def on_update(dt, xx):
-#       system_manager.update(dt)
     pyglet.clock.schedule_interval(system_manager.update, 1 / 60.)
     pyglet.app.run()
 
