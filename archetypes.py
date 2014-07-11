@@ -47,13 +47,8 @@ def create_player(entity_manager, physic_system):
 
 def create_map(entity_manager, physic_system):
     space = physic_system.space
-    # static = [pymunk.Segment(space.static_body, (10, 50), (300, 50), 5),
-    #           pymunk.Segment(space.static_body, (300, 50), (325, 50), 5),
-    #           pymunk.Segment(space.static_body, (325, 50), (350, 50), 5),
-    #           pymunk.Segment(space.static_body, (350, 50), (375, 50), 5),
-    #           pymunk.Segment(space.static_body, (375, 50), (680, 50), 5),
-    #           pymunk.Segment(space.static_body, (680, 50), (680, 370), 5),
-    #           pymunk.Segment(space.static_body, (680, 370), (10, 370), 5),
-    #           pymunk.Segment(space.static_body, (10, 370), (10, 50), 5)]
-    static = [pymunk.Segment(space.static_body, (0, 0), (300, 0), 5)]
+    # static = [pymunk.Segment(space.static_body, (0, 0), (300, 0), 5)]
+    static = [pymunk.Segment(space.static_body, (0, 0), (1000, 0), 5),
+              pymunk.Segment(space.static_body, (0, 0), (0, 200), 5),
+              pymunk.Segment(space.static_body, (1000, 0), (1000, 200), 5)]
     space.add(static)

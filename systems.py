@@ -15,13 +15,12 @@ class RenderSystem(ecs.System):
         self._window = window
 
     def update(self, dt):
-        cams_active = [c for e, c in
+        # Should be only one active camera, get the first available
+        camera = next((c for e, c in
                        self.entity_manager.pairs_for_type(components.Camera)
-                       if c.active]
-        if not cams_active:
+                       if c.active), None)
+        if not camera:
             return
-        # Should be only one active camera
-        camera = cams_active[0]
         for entity, render in \
                 self.entity_manager.pairs_for_type(components.Render):
                 physic = self.entity_manager.component_for_entity(
@@ -69,6 +68,8 @@ class MoveSystem(ecs.System):
                         behaviour.speed
                 else:
                     physic.body.velocity.x = 0
+                if behaviour._jump and not physic.jumping:
+                    physic.body.velocity.y += behaviour.jump_velocity
 
                 behaviour.reset()
 

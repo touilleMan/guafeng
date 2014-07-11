@@ -26,6 +26,7 @@ class Physic(ecs.Component):
     def __init__(self, body):
         super().__init__()
         self.body = body
+        self.jumping = False
 
 
 class Input(ecs.Component):
@@ -55,8 +56,9 @@ class Behaviour(ecs.Component):
     def __init__(self):
         super().__init__()
         self.movement = 0
-        self.jump = False
+        self._jump = False
         self.speed = 400
+        self.jump_velocity = 300
 
     def move_right(self):
         self.movement = 1
@@ -65,8 +67,8 @@ class Behaviour(ecs.Component):
         self.movement = -1
 
     def jump(self):
-        self.jump = True
+        self._jump = True
 
     def reset(self):
         self.movement = 0
-        self.jump = False
+        self._jump = False
