@@ -22,9 +22,9 @@ def main():
     physic_system = systems.PhysicSystem()
     system_manager.add_system(physic_system)
 
-    archetypes.create_map(entity_manager, physic_system)
-    archetypes.create_player(entity_manager, physic_system)
-    archetypes.create_camera(entity_manager)
+    archetypes.create_map(entity_manager, system_manager)
+    archetypes.create_player(entity_manager, system_manager)
+    archetypes.create_camera(entity_manager, system_manager)
 
     # Start the pyglet application
     @window.event
