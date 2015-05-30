@@ -3,8 +3,8 @@
 import pyglet
 import ecs
 
-import archetypes
-import systems
+from guafeng import archetypes
+from guafeng import systems
 
 
 def main():
@@ -18,7 +18,7 @@ def main():
 
     system_manager.add_system(render_system)
     system_manager.add_system(input_system)
-    system_manager.add_system(systems.MoveSystem())
+    # system_manager.add_system(systems.MoveSystem())
     physic_system = systems.PhysicSystem()
     system_manager.add_system(physic_system)
 
@@ -30,7 +30,7 @@ def main():
     @window.event
     def on_draw():
         render_system.draw()
-    pyglet.clock.schedule_interval(system_manager.update, 1 / 60.)
+    pyglet.clock.schedule_interval(system_manager.update, 1 / 60)
     pyglet.app.run()
 
 if __name__ == '__main__':

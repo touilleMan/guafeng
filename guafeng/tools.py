@@ -6,7 +6,7 @@ class Vect2D:
     """2 dimentional vector"""
 
     def __init__(self, x=0, y=0):
-        super(Vect2D, self).__init__()
+        super().__init__()
         self.x = x
         self.y = y
 
@@ -14,10 +14,16 @@ class Vect2D:
         return "x : {}, y : {}".format(self.x, self.y)
 
     def __add__(self, other):
-        if type(other) == Vect2D:
+        if isinstance(other, Vect2D):
             return Vect2D(self.x + other.x, self.y + other.y)
         else:
             return Vect2D(self.x + other, self.y + other)
+
+    def __mul__(self, other):
+        if isinstance(other, Vect2D):
+            return Vect2D(self.x * other.x, self.y * other.y)
+        else:
+            return Vect2D(self.x * other, self.y * other)
 
 
 class TestVect2D:
@@ -27,6 +33,7 @@ class TestVect2D:
         v2 = Vect2D(1, 2)
         v1 += 1
         self.assertEqual(v1 + 1, v2 - Vect2D(0, 1))
+        self.assertEqual(v1 * 4, v2 * Vect2D(4, 2))
 
 
 if __name__ == '__main__':
