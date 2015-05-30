@@ -8,6 +8,7 @@ from guafeng.components import (RenderComponent, CameraComponent,
                                 InputComponent, BehaviorComponent, PhysicComponent)
 from guafeng import systems
 
+
 # dummy image
 PLAYER_COLOR = (0xff, 0x00, 0x66, 255)
 PLAYER_IMAGE = pyglet.image.create(20, 50,

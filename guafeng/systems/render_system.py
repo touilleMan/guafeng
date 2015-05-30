@@ -2,7 +2,8 @@ from ecs import System
 import pyglet
 from pyglet.gl import glTranslatef, glLoadIdentity
 
-from guafeng.components import RenderComponent, PhysicComponent, CameraComponent
+from guafeng.components import (RenderComponent, PhysicComponent,
+                                CameraComponent, MapComponent)
 
 
 class RenderSystem(System):
@@ -32,6 +33,9 @@ class RenderSystem(System):
         if camera:
             # Move the "eye" to the current location on the map.
             glTranslatef(*camera.gl_translate)
+        # Draw the map
+        _, map = next(self.entity_manager.pairs_for_type(MapComponent))
+        map.renderer.draw()
         # self.batch.draw()
         # TODO : use batch to draw everything
         for entity, render in self.entity_manager.pairs_for_type(RenderComponent):

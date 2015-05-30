@@ -5,6 +5,7 @@ from guafeng.components.physic_component import PhysicComponent
 from guafeng.components.camera_component import CameraComponent
 from guafeng.components.input_component import InputComponent
 from guafeng.components.behavior_component import BehaviorComponent
+from guafeng.components.map_component import MapComponent
 
 
 class RenderComponent(Component):
