@@ -2,6 +2,7 @@ import pyglet
 from pyglet.window import key
 # import pymunk
 
+from guafeng.archetypes.map import create_map
 from guafeng import components
 from guafeng.components import (RenderComponent, CameraComponent,
                                 InputComponent, BehaviorComponent, PhysicComponent)
@@ -27,6 +28,7 @@ def create_camera(entity_manager, system_manager):
     input_c.add_keybind(key.I, lambda: camera_c.move(0, -10))
     input_c.add_keybind(key.P, lambda: camera_c.move(0, 10))
     input_c.add_keybind(key.F10, switch_show_fps, type='on_press')
+    input_c.add_keybind(key.ESCAPE, pyglet.app.exit, type='on_press')
     entity_manager.add_component(camera, input_c)
 
 
@@ -57,13 +59,3 @@ def create_player(entity_manager, system_manager):
     input_c.add_keybind(key.SPACE, behavior.jump)
     entity_manager.add_component(player, input_c)
     return player
-
-
-def create_map(entity_manager, system_manager):
-    physic_system = system_manager._system_types[systems.PhysicSystem]
-    # space = physic_system.space
-    # # static = [pymunk.Segment(space.static_body, (0, 0), (300, 0), 5)]
-    # static = [pymunk.Segment(space.static_body, (0, 0), (1000, 0), 5),
-    #           pymunk.Segment(space.static_body, (0, 0), (0, 200), 5),
-    #           pymunk.Segment(space.static_body, (1000, 0), (1000, 200), 5)]
-    # space.add(static)

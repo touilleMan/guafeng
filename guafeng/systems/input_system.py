@@ -31,10 +31,10 @@ class InputSystem(System):
             for kb in input_.keymap:
                 if kb.type == 'on_press':
                     if kb.key in self._pressed_keys:
-                        kb.callback
+                        kb.callback()
                 elif kb.type == 'on_release':
                     if kb.key in self._released_keys:
-                        kb.callback
+                        kb.callback()
                 else:
                     if self._keys[kb.key]:
                         kb.callback()
