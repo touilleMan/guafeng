@@ -14,3 +14,4 @@ class PhysicComponent(Component):
         self.speed = Vect2D(0, 0)
         self.acc = Vect2D(0, 0)
         self.hitbox = hitbox or Hitbox(10, 20)
+        self.jumping = False

@@ -18765,4 +18765,8 @@
    <tile gid="0"/>
   </data>
  </layer>
+ <objectgroup name="Object Layer 1" width="166" height="113">
+  <object name="beatle1" gid="38" x="379" y="6764"/>
+  <object name="beatle2" gid="38" x="66" y="7006"/>
+ </objectgroup>
 </map>

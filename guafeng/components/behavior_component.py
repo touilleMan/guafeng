@@ -6,9 +6,9 @@ class BehaviorComponent(Component):
     def __init__(self):
         super().__init__()
         self.movement = 0
-        self._jump = False
+        self.jump_ = False
         self.speed = 100
-        self.jump_velocity = 30
+        self.jump_velocity = 300
 
     def move_right(self):
         self.movement = 1
@@ -17,8 +17,8 @@ class BehaviorComponent(Component):
         self.movement = -1
 
     def jump(self):
-        self._jump = True
+        self.jump_ = True
 
     def reset(self):
         self.movement = 0
-        self._jump = False
+        self.jump_ = False

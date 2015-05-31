@@ -59,6 +59,15 @@ class TiledRenderer(object):
                 for obj in layer:
                     logger.info(obj)
 
+                    # TODO: fixme
+                    # x = mw // 2  # centers image
+                    # y = mh // 2
+                    print(obj.x, obj.y, obj.image)
+                    sprite = pyglet.sprite.Sprite(
+                        obj.image, batch=batch, x=obj.x, y=0
+                    )
+                    self.sprites.append(sprite)
+
                     # objects with points are polygons or lines
                     if hasattr(obj, 'points'):
                         draw_lines(poly_color, obj.closed, obj.points, 3)

@@ -10,9 +10,10 @@ class RenderSystem(System):
 
     """Renderer"""
 
-    def __init__(self, window, show_fps=False):
+    def __init__(self, world, show_fps=False):
         super().__init__()
-        self._window = window
+        self._world = world
+        self._window = self._world.window
         self.show_fps = show_fps
         self._clock_display = pyglet.clock.ClockDisplay()
         self.batch = pyglet.graphics.Batch()

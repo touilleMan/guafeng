@@ -16,15 +16,16 @@ class InputSystem(System):
 
     """Input handler"""
 
-    def __init__(self, window):
+    def __init__(self, world):
         super().__init__()
-        # Register the event lister from the window
+        self._world = world
+        # Register the event listener from the window
         self._keys = key.KeyStateHandler()
-        window.push_handlers(self._keys)
+        self._world.window.push_handlers(self._keys)
         self._pressed_keys = set()
         self._released_keys = set()
-        window.on_key_press = lambda s, m: self._pressed_keys.add(s)
-        window.on_key_release = lambda s, m: self._released_keys.add(s)
+        self._world.window.on_key_press = lambda s, m: self._pressed_keys.add(s)
+        self._world.window.on_key_release = lambda s, m: self._released_keys.add(s)
 
     def update(self, dt):
         for _, input_ in self.entity_manager.pairs_for_type(InputComponent):

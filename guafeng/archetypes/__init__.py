@@ -31,6 +31,7 @@ def create_camera(entity_manager, system_manager):
     input_c.add_keybind(key.F10, switch_show_fps, type='on_press')
     input_c.add_keybind(key.ESCAPE, pyglet.app.exit, type='on_press')
     entity_manager.add_component(camera, input_c)
+    return camera
 
 
 def create_player(entity_manager, system_manager):
