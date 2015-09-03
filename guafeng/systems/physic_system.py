@@ -4,7 +4,6 @@ from guafeng.components import BehaviorComponent, PhysicComponent
 
 
 class PhysicSystem(System):
-    GRAVITY = (0, -900)
 
     def __init__(self, world):
         super().__init__()
