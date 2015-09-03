@@ -35,12 +35,14 @@ class RenderSystem(System):
             # Move the "eye" to the current location on the map.
             glTranslatef(*camera.gl_translate)
         # Draw the map
-        _, map = next(self.entity_manager.pairs_for_type(MapComponent))
-        map.renderer.draw()
+        self._world.map.ground_batch.draw()
+        # _, map = next(self.entity_manager.pairs_for_type(MapComponent))
+        # map.renderer.draw()
         # self.batch.draw()
         # TODO : use batch to draw everything
-        for entity, render in self.entity_manager.pairs_for_type(RenderComponent):
+        for _, render in self.entity_manager.pairs_for_type(RenderComponent):
             render.sprite.draw()
+        # Display GUI
         if self.show_fps:
             glLoadIdentity()
             self._clock_display.draw()

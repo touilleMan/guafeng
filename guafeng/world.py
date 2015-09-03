@@ -6,10 +6,11 @@ from pyglet.window import key
 from guafeng import archetypes
 from guafeng import systems
 from guafeng.components import InputComponent
+from guafeng.model import MapModel
 
 
 class World:
-    def __init__(self, path):
+    def __init__(self):
         self._handlers_args = []
         self._handlers_kwargs = {}
         self.window = pyglet.window.Window()
@@ -27,8 +28,10 @@ class World:
         physic_system = systems.PhysicSystem(self)
         system_manager.add_system(physic_system)
 
-        self.map = archetypes.create_map(entity_manager, system_manager)
-        self.player = archetypes.create_player(entity_manager, system_manager)
+        self.map = None
+        self.player = None
+        # self.map = archetypes.create_map(entity_manager, system_manager)
+        # self.player = archetypes.create_player(entity_manager, system_manager)
         self.camera = archetypes.create_camera(entity_manager, system_manager)
 
         save_load = entity_manager.create_entity()
@@ -54,9 +57,15 @@ class World:
         self.window.pop_handlers()
 
     def save(self, name='save.gf'):
-        with open(name, 'w') as fd:
+        with open(name, 'wb') as fd:
             pickle.dump(self.entity_manager, fd)
 
     def load(self, name='save.gf'):
         with open(name, 'rb') as fd:
             self.entity_manager = pickle.load(fd)
+
+
+def create_world(map_path):
+    w = World()
+    MapModel(map_path).factory_create(w)
+    return w
