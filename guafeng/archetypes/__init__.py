@@ -61,3 +61,11 @@ def create_player(entity_manager, system_manager):
     input_c.add_keybind(key.SPACE, behavior.jump)
     entity_manager.add_component(player, input_c)
     return player
+
+
+def create_tile(world, x, y, width, height, image):
+    tile = world.entity_manager.create_entity()
+    world.entity_manager.add_component(tile, RenderComponent(
+        pyglet.sprite.Sprite(image, batch=world.map.ground_batch, x=x, y=y)))
+    world.entity_manager.add_component(tile, PhysicComponent(x=x, y=y))
+    return tile

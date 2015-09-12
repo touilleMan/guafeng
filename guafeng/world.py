@@ -5,11 +5,20 @@ from pyglet.window import key
 
 from guafeng import archetypes
 from guafeng import systems
-from guafeng.components import InputComponent
+from guafeng.components import InputComponent, PhysicComponent
 from guafeng.model import MapModel
 
 
 class World:
+
+    def create_entity(self):
+        return self.entity_manager.create_entity()
+
+    def add_component(self, entity, component_instance):
+        self.entity_manager.add_component(entity, component_instance)
+        if isinstance(component_instance, PhysicComponent):
+            self.physic_system.components.append(component_instance)
+
     def __init__(self):
         self._handlers_args = []
         self._handlers_kwargs = {}
@@ -25,13 +34,11 @@ class World:
         system_manager.add_system(render_system)
         system_manager.add_system(input_system)
         # system_manager.add_system(systems.MoveSystem())
-        physic_system = systems.PhysicSystem(self)
-        system_manager.add_system(physic_system)
+        self.physic_system = systems.PhysicSystem(self)
+        system_manager.add_system(self.physic_system)
 
         self.map = None
         self.player = None
-        # self.map = archetypes.create_map(entity_manager, system_manager)
-        # self.player = archetypes.create_player(entity_manager, system_manager)
         self.camera = archetypes.create_camera(entity_manager, system_manager)
 
         save_load = entity_manager.create_entity()

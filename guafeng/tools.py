@@ -11,7 +11,7 @@ class Vect2D:
         self.y = y
 
     def __repr__(self):
-        return "x : {}, y : {}".format(self.x, self.y)
+        return "<Vect2D (x: {}, y: {})".format(self.x, self.y)
 
     def __add__(self, other):
         if isinstance(other, Vect2D):
@@ -19,11 +19,25 @@ class Vect2D:
         else:
             return Vect2D(self.x + other, self.y + other)
 
+    def __sub__(self, other):
+        if isinstance(other, Vect2D):
+            return Vect2D(self.x - other.x, self.y - other.y)
+        else:
+            return Vect2D(self.x - other, self.y - other)
+
     def __mul__(self, other):
         if isinstance(other, Vect2D):
             return Vect2D(self.x * other.x, self.y * other.y)
         else:
             return Vect2D(self.x * other, self.y * other)
+
+    def __getitem__(self, item):
+        if item == 0:
+            return self.x
+        elif item == 1:
+            return self.y
+        else:
+            raise IndexError()
 
 
 class TestVect2D:
